@@ -1,0 +1,14 @@
+imports:
+    - { resource: validation.yml }
+
+services:
+    petlove.backend_user_service:
+        class: Petlove\Domain\BackendUser\BackendUserService
+        arguments:
+            - "@petlove.backend_user_repository"
+            - "@validator"
+
+    petlove.password_encoder:
+        class: Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder
+        arguments:
+            - 13

@@ -1,0 +1,23 @@
+services:
+    petlove.validator.backend_user_exists:
+        class: Petlove\Domain\BackendUser\Validation\Validator\BackendUserExistsValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments:
+            - "@petlove.backend_user_light_specification"
+
+    petlove.validator.backend_user_unique_email:
+        class: Petlove\Domain\BackendUser\Validation\Validator\UniqueBackendUserEmailValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments:
+            - "@petlove.backend_user_light_specification"
+            - "@petlove.backend_user_repository"
+
+    petlove.validator.backend_user_unique_username:
+        class: Petlove\Domain\BackendUser\Validation\Validator\UniqueBackendUserUsernameValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments:
+            - "@petlove.backend_user_light_specification"
+            - "@petlove.backend_user_repository"

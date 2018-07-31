@@ -1,0 +1,30 @@
+services:
+  mysql_connection:
+      class: Util\MySql\Connection
+      arguments: ["%database_host%", "%database_user%", "%database_password%", "%database_name%"]
+
+  petlove.migration_service:
+      class: Petlove\Infrastructure\Common\MigrationService
+      arguments:
+          - "%kernel.root_dir%"
+          - "@mysql_connection"
+
+  redis:
+      class: Redis
+      calls:
+          - [connect, ["%redis_host%", "%redis_port%"]]
+
+  petlove.backend_user_repository:
+      class: Petlove\Infrastructure\BackendUser\MysqlBackendUserRepository
+      arguments:
+          - "@mysql_connection"
+          - "@petlove.cache.backend_user"
+          - "@petlove.password_encoder"
+
+  petlove.backend_user_light_specification:
+      class: Petlove\Infrastructure\BackendUser\MysqlBackendUserLightSpecification
+      arguments:
+          - "@mysql_connection"
+
+  petlove.cache.backend_user:
+      class: Petlove\Infrastructure\Common\Cache

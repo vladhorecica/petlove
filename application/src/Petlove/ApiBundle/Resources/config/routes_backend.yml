@@ -1,0 +1,40 @@
+
+api.backend_users.delete:
+    path: /backend-users/{userId}
+    methods: [DELETE]
+    defaults: { _controller: PetloveApiBundle:Backend/BackendUsers:delete}
+
+api.backend_users.get:
+    path: /backend-users/{userId}
+    methods: [GET]
+    defaults: { _controller: PetloveApiBundle:Backend/BackendUsers:find}
+
+api.backend_users.getAll:
+    path: /backend-users
+    methods: [GET]
+    defaults: { _controller: PetloveApiBundle:Backend/BackendUsers:getAll}
+
+api.backend_users.post:
+    path: /backend-users
+    methods: [POST]
+    defaults: { _controller: PetloveApiBundle:Backend/BackendUsers:post}
+
+api.backend_users.put:
+    path: /backend-users/{userId}
+    methods: [PUT]
+    defaults: { _controller: PetloveApiBundle:Backend/BackendUsers:put}
+#
+#api.backend.sessions.post:
+#    path: /sessions
+#    methods: [POST]
+#    defaults: { _controller: PetloveApiBundle:Backend/Sessions:post }
+#
+#api.backend.sessions.delete:
+#    path: /sessions/{sessionId}
+#    methods: [DELETE]
+#    defaults: { _controller: PetloveApiBundle:Backend/Sessions:delete }
+#
+#api.backend.sessions.patch:
+#    path: /sessions
+#    methods: [PATCH]
+#    defaults: { _controller: PetloveApiBundle:Backend/Sessions:patch }

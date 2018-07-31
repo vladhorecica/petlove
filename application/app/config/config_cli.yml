@@ -1,0 +1,25 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: infrastructure.yml }
+    - { resource: domain.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    validation:      { enable_annotations: false }
+    default_locale:  "%locale%"
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/monolog.log"
+            level: error

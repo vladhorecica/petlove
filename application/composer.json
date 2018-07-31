@@ -1,0 +1,60 @@
+{
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "Base\\": "app"
+        },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "respect/validation": "^1.1",
+        "sensio/distribution-bundle": "^5.0.19",
+        "symfony/monolog-bundle": "^3.3",
+        "symfony/symfony": "3.4.*",
+        "nelmio/cors-bundle": "^1.5",
+        "league/url": "^3.3"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0",
+        "phpunit/phpunit": "5.5.*",
+        "sensio/distribution-bundle": "^5.0",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "davedevelopment/phpmig": "dev-master",
+        "fzaninotto/faker": "^1.5"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ]
+    },
+    "config": {
+        "platform": {
+            "php": "5.6"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "3.4-dev"
+        }
+    }
+}
