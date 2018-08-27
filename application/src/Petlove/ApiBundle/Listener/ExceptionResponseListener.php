@@ -2,15 +2,14 @@
 
 namespace Petlove\ApiBundle\Listener;
 
+use Petlove\Domain\Security\Exception\AuthenticationError;
+use Petlove\Domain\Security\Exception\AuthorizationError;
 use Util\Data\DataProcessingError;
 use Util\Util\Gen;
 use Petlove\ApiBundle\Exception\DataInputError;
 use Petlove\Domain\Common\Exception\NotFoundError;
 use Petlove\Domain\Common\Exception\SoftDeletedResourceError;
 use Petlove\Domain\Common\Exception\ValidationError;
-//use Petlove\Domain\Security\Exception\AuthenticationError;
-//use Petlove\Domain\Security\Exception\AuthorizationError;
-//use Petlove\Infrastructure\Exception\TenantDatabaseConnectionError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,19 +31,19 @@ class ExceptionResponseListener
                 ],
             ], $exception->getStatusCode()));
         }
-//        elseif ($exception instanceof AuthenticationError) {
-//            $event->setResponse(new JsonResponse([
-//                'error' => [
-//                    'message' => 'Authentication failed',
-//                ],
-//            ], JsonResponse::HTTP_UNAUTHORIZED));
-//        } elseif ($exception instanceof AuthorizationError) {
-//            $event->setResponse(new JsonResponse([
-//                'error' => [
-//                    'message' => $exception->getMessage(),
-//                ],
-//            ], JsonResponse::HTTP_FORBIDDEN));
-//        }
+        elseif ($exception instanceof AuthenticationError) {
+            $event->setResponse(new JsonResponse([
+                'error' => [
+                    'message' => 'Authentication failed',
+                ],
+            ], JsonResponse::HTTP_UNAUTHORIZED));
+        } elseif ($exception instanceof AuthorizationError) {
+            $event->setResponse(new JsonResponse([
+                'error' => [
+                    'message' => $exception->getMessage(),
+                ],
+            ], JsonResponse::HTTP_FORBIDDEN));
+        }
         elseif ($exception instanceof DataProcessingError) {
             $event->setResponse(new JsonResponse([
                 'error' => [
@@ -94,15 +93,6 @@ class ExceptionResponseListener
                 ),
             ], JsonResponse::HTTP_CONFLICT));
         }
-//        elseif ($exception instanceof TenantDatabaseConnectionError ||
-//            $exception instanceof TenantChiliInterfaceError) {
-//            $event->setResponse(new JsonResponse([
-//                'error' => [
-//                    'code' => 'service_unavailable',
-//                    'message' => $exception->getMessage(),
-//                ],
-//            ], JsonResponse::HTTP_SERVICE_UNAVAILABLE));
-//        }
         elseif ($exception instanceof \DomainException) {
             $event->setResponse(new JsonResponse([
                 'error' => [

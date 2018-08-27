@@ -25,9 +25,9 @@ class SessionsController extends ApiController
 
         $cmd = new BackendLogin($email, $password);
 
-        $sessionId = $this->container->get('kadanza.security_service')->login($this->getAuthorization(), $cmd);
+        $sessionId = $this->container->get('petlove.security_service')->login($this->getAuthorization(), $cmd);
 
-        $user = $this->container->get('kadanza.backend_user_repository')
+        $user = $this->container->get('petlove.backend_user_repository')
             ->query(new BackendUserEmailFilter($cmd->getEmail()))->getIterator()->current();
 
         return new JsonResponse([
@@ -44,7 +44,7 @@ class SessionsController extends ApiController
     public function deleteAction($sessionId)
     {
         $cmd = new DeleteSession(new SessionId($sessionId));
-        $this->container->get('kadanza.security_service')->logout($this->getAuthorization(), $cmd);
+        $this->container->get('petlove.security_service')->logout($this->getAuthorization(), $cmd);
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }

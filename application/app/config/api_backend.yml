@@ -5,8 +5,8 @@ services:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
     petlove.backend_api.authentication_listener:
         class: Petlove\ApiBundle\Listener\BackendAuthenticationListener
-#        arguments:
-#            - "@petlove.security_service"
+        arguments:
+            - "@petlove.security_service"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 100}
 

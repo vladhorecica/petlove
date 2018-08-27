@@ -12,3 +12,25 @@ services:
         class: Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder
         arguments:
             - 13
+
+    petlove.authorization_service:
+        class: Petlove\Domain\Security\Service\AuthorizationService
+        public: false
+
+    petlove.login_logout_service:
+        class: Petlove\Domain\Security\Service\LoginLogoutService
+        arguments:
+            - "@petlove.backend_session_repository"
+            - "@petlove.password_encoder"
+            - "@petlove.backend_user_repository"
+            - "@logger"
+            - "@validator"
+        public: false
+
+    petlove.security_service:
+        class: Petlove\Domain\Security\Service\SecurityService
+        arguments:
+            - "@petlove.authorization_service"
+            - "@petlove.login_logout_service"
+            - "@petlove.backend_session_repository"
+            - "@petlove.backend_user_repository"

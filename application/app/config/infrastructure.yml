@@ -14,6 +14,7 @@ services:
       calls:
           - [connect, ["%redis_host%", "%redis_port%"]]
 
+  ### Backend Users ###
   petlove.backend_user_repository:
       class: Petlove\Infrastructure\BackendUser\MysqlBackendUserRepository
       arguments:
@@ -28,3 +29,14 @@ services:
 
   petlove.cache.backend_user:
       class: Petlove\Infrastructure\Common\Cache
+
+  ### Session ###
+  petlove.session_base_repository:
+        class: Petlove\Infrastructure\Security\RedisSessionRepository
+        arguments:
+            - "@redis"
+        abstract: true
+
+  petlove.backend_session_repository:
+      class: Petlove\Infrastructure\Security\RedisBackendSessionRepository
+      parent: petlove.session_base_repository
