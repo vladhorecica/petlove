@@ -38,3 +38,13 @@ services:
       volumes:
         - ./application:/var/www/html
         - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.0/fpm/conf.d/99-overrides.ini
+
+    node:
+      build: docker/node
+      container_name: ${CONTAINER_NAME_PREFIX}-node
+      working_dir: /var/www/html/ui/backend
+      volumes:
+        - ./application:/var/www/html
+      ports:
+        - 30001:30001
+      tty: true
