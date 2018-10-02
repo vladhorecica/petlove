@@ -1,0 +1,39 @@
+sudo: required
+
+language: php
+
+php:
+  - '7.0'
+
+matrix:
+  fast_finish: true
+
+env:
+  global:
+    - GIT_BRANCH: master
+
+cache:
+  apt: true
+  directories:
+    - vendor
+    - $HOME/.composer/cache/files
+
+addons:
+  apt:
+    packages:
+      - php7.0-fpm
+      - nginx
+
+install:
+  # install Composer dependencies
+  - composer install --prefer-dist
+
+# not really needed but meh, in the future we might need to add a nginx conf
+before_script:
+  # restart Nginx and PHP-FPM services to make sure the new site is loaded
+  - sudo service php7.0-fpm restart
+  - sudo service nginx restart
+
+script:
+  # run the tests
+  - make tests

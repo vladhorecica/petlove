@@ -13,6 +13,9 @@
     </php>
 
     <testsuites>
+        <testsuite name="Array51 unit tests">
+            <directory>src/Util/Tests/Unit</directory>
+        </testsuite>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
         </testsuite>
