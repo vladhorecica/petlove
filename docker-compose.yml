@@ -19,7 +19,7 @@ services:
 
     webserver:
       image: nginx:alpine
-      container_name: ${CONTAINER_NAME_PREFIX}-nignx
+      container_name: ${CONTAINER_NAME_PREFIX}-nginx
       working_dir: /var/www/html
       links:
         - php-fpm
