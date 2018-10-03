@@ -16,11 +16,10 @@ env:
 
 install:
   # install Composer dependencies
-  - composer install --prefer-dist
+  - cd application && composer install --prefer-dist
 
 before_script:
   - composer self-update
-  - composer install --prefer-source --no-interaction --dev
 
 script:
   # run the tests
