@@ -7,6 +7,10 @@ php:
   - '7.1'
   - '7.2'
 
+notifications:
+   on_success: never
+   on_failure: always
+
 matrix:
   fast_finish: true
 
@@ -16,7 +20,7 @@ env:
 
 install:
   # install Composer dependencies
-  - cd application && composer install --prefer-dist
+  - cd application && composer install --prefer-dist && cd ..
 
 before_script:
   - composer self-update
