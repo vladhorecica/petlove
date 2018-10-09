@@ -16,6 +16,9 @@ services:
         MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
         MYSQL_DATABASE: ${DB_NAME}
         MYSQL_TEST_DATABASE: ${DB_TEST_NAME}
+      volumes:
+        - ./docker/data/db:/var/li b/mysql
+        - ./docker/mysql/init:/docker-entrypoint-initdb.d
 
     webserver:
       image: nginx:alpine

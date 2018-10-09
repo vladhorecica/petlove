@@ -1,3 +1,5 @@
+include .env
+
 DKC = docker-compose
 DK = docker
 
@@ -23,3 +25,6 @@ dk-prune: ## Clean containers
 
 dk-migrate-db: ## Make database up to date
 	$(DK) exec -ti pet-php-fpm /bin/bash -c "bin/console petlove:MigrateDb"
+
+dk-create-admin: ## Create admin user. arg `name` required
+	$(DK) exec -ti $(CONTAINER_NAME_PREFIX)-php-fpm /bin/bash -c "bin/console petlove:CreateAdminBackendUser $(name)@admin.com $(name) $(name)"
