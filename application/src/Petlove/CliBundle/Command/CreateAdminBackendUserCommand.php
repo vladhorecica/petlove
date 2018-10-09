@@ -30,10 +30,10 @@ class CreateAdminBackendUserCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $command = new CreateBackendUser(
-            BackendUserType::super_admin(),
             new BackendUserEmail($input->getArgument('email')),
+            new BackendUserUsername($input->getArgument('username')),
             $input->getArgument('password'),
-            new BackendUserUsername($input->getArgument('username'))
+            BackendUserType::admin()
         );
 
         $this->getContainer()->get('petlove.backend_user_service')->create(new GodAuthorization(), $command);

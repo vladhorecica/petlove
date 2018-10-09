@@ -78,7 +78,7 @@ class AdminAuthorization implements BackendAuthorization
      */
     public function canDeleteBackendUsers()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -86,7 +86,7 @@ class AdminAuthorization implements BackendAuthorization
      */
     public function canAccessBackendUsers()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -94,7 +94,7 @@ class AdminAuthorization implements BackendAuthorization
      */
     public function canCreateBackendUsers()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -102,7 +102,7 @@ class AdminAuthorization implements BackendAuthorization
      */
     public function canUpdateBackendUsers()
     {
-        return false;
+        return true;
     }
 
     /**

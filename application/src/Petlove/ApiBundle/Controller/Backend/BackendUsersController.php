@@ -26,11 +26,8 @@ class BackendUsersController extends ApiController
         $userId = new BackendUserId((int)$userId);
 
         try {
-//            $this->get('petlove.backend_user_service')->delete(
-//                $this->getAuthorization(),
-//                new DeleteBackendUser($userId)
-//            );
             $this->get('petlove.backend_user_service')->delete(
+                $this->getAuthorization(),
                 new DeleteBackendUser($userId)
             );
         } catch (ValidationError $ex) {
@@ -44,6 +41,7 @@ class BackendUsersController extends ApiController
     {
         /** @var BackendUser $user */
         $user = $this->get('petlove.backend_user_service')->find(
+            $this->getAuthorization(),
             new BackendUserId((int)$userId)
         );
 
@@ -62,13 +60,9 @@ class BackendUsersController extends ApiController
             ->process(new PageProcessor(self::SEARCH_DEFAULT_OFFSET, null, self::SEARCH_DEFAULT_SIZE, null))
             ->get();
 
-//        $collection = $this->get('petlove.backend_user_service')->query(
-//            $this->getAuthorization(),
-//            null,
-//            $page
-//        );
         $collection = $this->get('petlove.backend_user_service')->query(
-            null,
+            $this->getAuthorization(),
+        null,
             $page
         );
 
@@ -96,8 +90,7 @@ class BackendUsersController extends ApiController
     {
         $data = $this->getRequestData();
         $cmd = $data->process(new CreateBackendUserProcessor())->get();
-//        $this->get('petlove.backend_user_service')->create($this->getAuthorization(), $cmd);
-        $this->get('petlove.backend_user_service')->create($cmd);
+        $this->get('petlove.backend_user_service')->create($this->getAuthorization(), $cmd);
 
         return new JsonResponse(null, Response::HTTP_CREATED);
     }
@@ -111,8 +104,7 @@ class BackendUsersController extends ApiController
     {
         $data = $this->getRequestData();
         $updateCmd = $data->process(new UpdateBackendUserProcessor(new BackendUserId((int) $userId)))->get();
-//        $this->get('kadanza.backend_user_service')->update($this->getAuthorization(), $updateCmd);
-        $this->get('kadanza.backend_user_service')->update($updateCmd);
+        $this->get('petlove.backend_user_service')->update($this->getAuthorization(), $updateCmd);
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);    }
 }
