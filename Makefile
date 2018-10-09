@@ -1,5 +1,3 @@
-include .env
-
 DKC = docker-compose
 DK = docker
 
