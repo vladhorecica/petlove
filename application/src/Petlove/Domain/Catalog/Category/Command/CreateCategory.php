@@ -51,7 +51,7 @@ class CreateCategory
     /**
      * @return null|CategoryId
      */
-    public function getParent(): CategoryId
+    public function getParent()
     {
         return $this->parent;
     }

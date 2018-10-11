@@ -10,6 +10,10 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Valid;
 
+/**
+ * Class UpdateCategory
+ * @package Petlove\Domain\Catalog\Category\Command
+ */
 class UpdateCategory
 {
     /** @var CategoryId */
@@ -62,7 +66,7 @@ class UpdateCategory
     /**
      * @return null|CategoryId
      */
-    public function getParent(): CategoryId
+    public function getParent()
     {
         return $this->parent;
     }

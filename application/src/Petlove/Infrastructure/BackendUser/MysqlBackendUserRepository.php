@@ -20,19 +20,13 @@ class MysqlBackendUserRepository implements BackendUserRepository
 {
     use MysqlResultBuilder;
 
-    /**
-     * @var Connection
-     */
+    /** @var Connection */
     private $mysql;
 
-    /**
-     * @var Cache
-     */
+    /** @var Cache */
     private $userCache;
 
-    /**
-     * @var PasswordEncoderInterface
-     */
+    /** @var PasswordEncoderInterface */
     private $passwordEncoder;
 
     /**
@@ -49,12 +43,7 @@ class MysqlBackendUserRepository implements BackendUserRepository
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    /**
-     * @param CreateBackendUser $cmd
-     *
-     * @return BackendUserId
-     */
-    public function create(CreateBackendUser $cmd)
+    public function create(CreateBackendUser $cmd): BackendUserId
     {
         $id = $this->mysql->insert(
             'backend_users',
@@ -70,9 +59,6 @@ class MysqlBackendUserRepository implements BackendUserRepository
         return new BackendUserId($id);
     }
 
-    /**
-     * @param UpdateBackendUser $cmd
-     */
     public function update(UpdateBackendUser $cmd)
     {
         $data = [
@@ -90,12 +76,7 @@ class MysqlBackendUserRepository implements BackendUserRepository
         $this->userCache->remove($cmd->getId());
     }
 
-    /**
-     * @param BackendUserId $id
-     *
-     * @return BackendUser
-     */
-    public function get(BackendUserId $id)
+    public function find(BackendUserId $id): BackendUser
     {
         return $this->userCache->get($id, function () use ($id) {
             $backendUser = $this->mysql->bufferedQuery('
@@ -114,9 +95,6 @@ class MysqlBackendUserRepository implements BackendUserRepository
         });
     }
 
-    /**
-     * @param BackendUserId $id
-     */
     public function delete(BackendUserId $id)
     {
         $this->mysql->delete('backend_users', ['id' => $id]);

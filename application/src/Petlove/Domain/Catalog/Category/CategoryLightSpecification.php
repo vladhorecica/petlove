@@ -5,17 +5,13 @@ namespace Petlove\Domain\Catalog\Category;
 use Petlove\Domain\Catalog\Category\Value\CategoryId;
 use Petlove\Domain\Catalog\Category\Value\CategoryName;
 
+/**
+ * Interface CategoryLightSpecification
+ * @package Petlove\Domain\Catalog\Category
+ */
 interface CategoryLightSpecification
 {
-    /**
-     * @param CategoryName $name
-     * @return bool
-     */
-    public function existsByName(CategoryName $name);
+    public function existsByName(CategoryName $name): bool;
 
-    /**
-     * @param CategoryId $id
-     * @return bool
-     */
-    public function exists(CategoryId $id);
+    public function exists(CategoryId $id): bool;
 }

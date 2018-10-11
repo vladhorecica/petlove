@@ -3,31 +3,31 @@
 namespace Petlove\ApiBundle\Controller\Backend;
 
 use Petlove\ApiBundle\Controller\ApiController;
-use Petlove\ApiBundle\DataProcessor\BackendUser\CreateBackendUserProcessor;
-use Petlove\ApiBundle\DataProcessor\BackendUser\UpdateBackendUserProcessor;
+use Petlove\ApiBundle\DataProcessor\Catalog\Category\CreateCategoryProcessor;
+use Petlove\ApiBundle\DataProcessor\Catalog\Category\UpdateCategoryProcessor;
 use Petlove\ApiBundle\DataProcessor\PageProcessor;
-use Petlove\Domain\BackendUser\BackendUser;
-use Petlove\Domain\BackendUser\Command\DeleteBackendUser;
-use Petlove\Domain\BackendUser\Value\BackendUserId;
+use Petlove\Domain\Catalog\Category\Category;
+use Petlove\Domain\Catalog\Category\Command\DeleteCategory;
+use Petlove\Domain\Catalog\Category\Value\CategoryId;
 use Petlove\Domain\Common\Exception\ValidationError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Util\Value\Page;
 
 /**
- * Class BackendUsersController
+ * Class CategoryController
  * @package Petlove\ApiBundle\Controller\Backend
  */
-class BackendUsersController extends ApiController
+class CategoriesController extends ApiController
 {
-    public function deleteAction($userId): JsonResponse
+    public function deleteAction($categoryId): JsonResponse
     {
-        $userId = new BackendUserId((int)$userId);
+        $categoryId = new CategoryId((int)$categoryId);
 
         try {
-            $this->get('petlove.backend_user_service')->delete(
+            $this->get('petlove.catalog_category_service')->delete(
                 $this->getAuthorization(),
-                new DeleteBackendUser($userId)
+                new DeleteCategory($categoryId)
             );
         } catch (ValidationError $ex) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
@@ -36,15 +36,15 @@ class BackendUsersController extends ApiController
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function findAction($userId): JsonResponse
+    public function findAction($categoryId): JsonResponse
     {
-        /** @var BackendUser $user */
-        $user = $this->get('petlove.backend_user_service')->find(
+        /** @var Category $category */
+        $category = $this->get('petlove.catalog_category_service')->find(
             $this->getAuthorization(),
-            new BackendUserId((int)$userId)
+            new CategoryId((int)$categoryId)
         );
 
-        return new JsonResponse($user->jsonSerialize());
+        return new JsonResponse($category->jsonSerialize());
     }
 
     public function getAllAction(): JsonResponse
@@ -56,7 +56,7 @@ class BackendUsersController extends ApiController
             ->process(new PageProcessor(self::SEARCH_DEFAULT_OFFSET, null, self::SEARCH_DEFAULT_SIZE, null))
             ->get();
 
-        $collection = $this->get('petlove.backend_user_service')->query(
+        $collection = $this->get('petlove.catalog_category_service')->query(
             $this->getAuthorization(),
         null,
             $page
@@ -71,9 +71,9 @@ class BackendUsersController extends ApiController
             'data' => [],
         ];
 
-        /** @var BackendUser $user */
-        foreach ($collection as $user) {
-            $responseData['data'][] = $user->jsonSerialize();
+        /** @var Category $category */
+        foreach ($collection as $category) {
+            $responseData['data'][] = $category->jsonSerialize();
         }
 
         return new JsonResponse($responseData);
@@ -82,17 +82,17 @@ class BackendUsersController extends ApiController
     public function postAction(): JsonResponse
     {
         $data = $this->getRequestData();
-        $cmd = $data->process(new CreateBackendUserProcessor())->get();
-        $id = $this->get('petlove.backend_user_service')->create($this->getAuthorization(), $cmd);
+        $cmd = $data->process(new CreateCategoryProcessor())->get();
+        $this->get('petlove.catalog_category_service')->create($this->getAuthorization(), $cmd);
 
-        return new JsonResponse(['id' => $id], Response::HTTP_CREATED);
+        return new JsonResponse(null, Response::HTTP_CREATED);
     }
 
-    public function putAction($userId): JsonResponse
+    public function putAction($categoryId): JsonResponse
     {
         $data = $this->getRequestData();
-        $updateCmd = $data->process(new UpdateBackendUserProcessor(new BackendUserId((int) $userId)))->get();
-        $this->get('petlove.backend_user_service')->update($this->getAuthorization(), $updateCmd);
+        $updateCmd = $data->process(new UpdateCategoryProcessor(new CategoryId((int)$categoryId)))->get();
+        $this->get('petlove.catalog_category_service')->update($this->getAuthorization(), $updateCmd);
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }

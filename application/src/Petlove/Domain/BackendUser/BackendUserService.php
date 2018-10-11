@@ -14,16 +14,16 @@ use Petlove\Domain\Common\Exception\ValidationError;
 use Petlove\Domain\Common\Query\Result;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Class BackendUserService
+ * @package Petlove\Domain\BackendUser
+ */
 class BackendUserService
 {
-    /**
-     * @var BackendUserRepository
-     */
+    /** @var BackendUserRepository */
     private $backendUserRepo;
 
-    /**
-     * @var ValidatorInterface
-     */
+    /** @var ValidatorInterface */
     private $validator;
 
     /**
@@ -40,13 +40,7 @@ class BackendUserService
         $this->validator = $validator;
     }
 
-    /**
-     * @param BackendAuthorization $authorization
-     * @param CreateBackendUser $cmd
-     *
-     * @return BackendUserId
-     */
-    public function create(BackendAuthorization $authorization, CreateBackendUser $cmd)
+    public function create(BackendAuthorization $authorization, CreateBackendUser $cmd): BackendUserId
     {
         if ($authorization->isAnonymous()) {
             throw new AuthenticationError();
@@ -61,10 +55,6 @@ class BackendUserService
         return $this->backendUserRepo->create($cmd);
     }
 
-    /**
-     * @param BackendAuthorization $authorization
-     * @param UpdateBackendUser $cmd
-     */
     public function update(BackendAuthorization $authorization, UpdateBackendUser $cmd)
     {
         if ($authorization->isAnonymous()) {
@@ -80,10 +70,6 @@ class BackendUserService
         $this->backendUserRepo->update($cmd);
     }
 
-    /**
-     * @param BackendAuthorization $authorization
-     * @param DeleteBackendUser $cmd
-     */
     public function delete(BackendAuthorization $authorization, DeleteBackendUser $cmd)
     {
         if ($authorization->isAnonymous()) {
@@ -124,13 +110,7 @@ class BackendUserService
         return $this->backendUserRepo->query($filter, $page);
     }
 
-    /**
-     * @param BackendAuthorization $authorization
-     * @param BackendUserId $userId
-     *
-     * @return BackendUser
-     */
-    public function find(BackendAuthorization $authorization, BackendUserId $userId)
+    public function find(BackendAuthorization $authorization, BackendUserId $userId): BackendUser
     {
         if ($authorization->isAnonymous()) {
             throw new AuthenticationError();
@@ -139,6 +119,6 @@ class BackendUserService
             throw new AuthorizationError('Only admins can access backend users.');
         }
 
-        return $this->backendUserRepo->get($userId);
+        return $this->backendUserRepo->find($userId);
     }
 }

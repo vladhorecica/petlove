@@ -4,19 +4,19 @@ namespace Petlove\Domain\Security\Authorization;
 
 use Petlove\Domain\BackendUser\BackendUser;
 use Petlove\Domain\BackendUser\Value\BackendUserId;
+use Petlove\Domain\Catalog\CatalogAuthorization;
 
 /**
- * @SuppressWarnings(PHPMD)
+ * Class AdminAuthorization
+ * @package Petlove\Domain\Security\Authorization
  */
-class AdminAuthorization implements BackendAuthorization
+class AdminAuthorization implements BackendAuthorization, CatalogAuthorization
 {
-    /**
-     * @var BackendUser
-     */
+    /** @var BackendUser */
     private $backendUser;
 
     /**
-     * SuperAdminAuthorization constructor.
+     * AdminAuthorization constructor.
      *
      * @param BackendUser $backendUser
      */
@@ -25,28 +25,17 @@ class AdminAuthorization implements BackendAuthorization
         $this->backendUser = $backendUser;
     }
 
-    /**
-     * @return BackendUser
-     */
-    public function getUser()
+    public function getUser(): BackendUser
     {
         return $this->backendUser;
     }
 
-    /**
-     * @return bool
-     */
-    public function canResumeSession()
+    public function canResumeSession(): bool
     {
         return true;
     }
 
-    /**
-     * @param BackendUserId $backendUserId
-     *
-     * @return bool
-     */
-    public function canLogout($backendUserId)
+    public function canLogout(BackendUserId $backendUserId): bool
     {
         if (!$backendUserId instanceof BackendUserId) {
             throw new \InvalidArgumentException();
@@ -55,60 +44,47 @@ class AdminAuthorization implements BackendAuthorization
         return $this->isMe($backendUserId);
     }
 
-    /**
-     * @param BackendUserId|null $user
-     *
-     * @return bool
-     */
-    private function isMe(BackendUserId $user = null)
+    private function isMe(BackendUserId $user = null): bool
     {
         return $this->backendUser->getId()->equals($user);
     }
 
-    /**
-     * @return bool
-     */
-    public function canLogin()
+    public function canLogin(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDeleteBackendUsers()
+    public function canDeleteBackendUsers(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function canAccessBackendUsers()
+    public function canAccessBackendUsers(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function canCreateBackendUsers()
+    public function canManageCatalog(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function canUpdateBackendUsers()
+    public function canAccessCatalog(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAnonymous()
+    public function canCreateBackendUsers(): bool
+    {
+        return true;
+    }
+
+    public function canUpdateBackendUsers(): bool
+    {
+        return true;
+    }
+
+    public function isAnonymous(): bool
     {
         return false;
     }

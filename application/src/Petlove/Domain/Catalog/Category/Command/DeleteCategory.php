@@ -25,7 +25,7 @@ class DeleteCategory
     }
 
     /**
-     * @return BackendUserId
+     * @return CategoryId
      */
     public function getId()
     {

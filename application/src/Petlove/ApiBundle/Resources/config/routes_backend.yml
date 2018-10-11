@@ -38,3 +38,28 @@ api.backend.sessions.patch:
     path: /sessions
     methods: [PATCH]
     defaults: { _controller: PetloveApiBundle:Backend/Sessions:patch }
+
+api.catalog_category.delete:
+    path: /catalog-categories/{categoryId}
+    methods: [DELETE]
+    defaults: { _controller: PetloveApiBundle:Backend/Categories:delete}
+
+api.catalog_category.get:
+    path: /catalog-categories/{categoryId}
+    methods: [GET]
+    defaults: { _controller: PetloveApiBundle:Backend/Categories:find}
+
+api.catalog_category.getAll:
+    path: /catalog-categories
+    methods: [GET]
+    defaults: { _controller: PetloveApiBundle:Backend/Categories:getAll}
+
+api.catalog_category.post:
+    path: /catalog-categories
+    methods: [POST]
+    defaults: { _controller: PetloveApiBundle:Backend/Categories:post}
+
+api.catalog_category.put:
+    path: /catalog-categories/{categoryId}
+    methods: [PUT]
+    defaults: { _controller: PetloveApiBundle:Backend/Categories:put}

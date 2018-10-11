@@ -3,83 +3,67 @@
 namespace Petlove\Domain\Security\Authorization;
 
 use Petlove\Domain\BackendUser\Value\BackendUserId;
+use Petlove\Domain\Catalog\CatalogAuthorization;
 
 /**
- * @SuppressWarnings(PHPMD)
+ * Class AnonymousAuthorization
+ * @package Petlove\Domain\Security\Authorization
  */
-class AnonymousAuthorization implements BackendAuthorization
+class AnonymousAuthorization implements BackendAuthorization, CatalogAuthorization
 {
     public function getUser()
     {
         return;
     }
 
-    /**
-     * @return bool
-     */
-    public function canResumeSession()
+    public function canResumeSession(): bool
     {
         return false;
     }
 
+    public function canManageCatalog(): bool
+    {
+        return false;
+    }
 
-
-    /**
-     * @return bool
-     */
-    public function canLogin()
+    public function canAccessCatalog(): bool
     {
         return true;
     }
 
-    /**
-     * @param BackendUserId $userId
-     *
-     * @return bool
-     */
-    public function canLogout($userId)
+    public function canLogin(): bool
+    {
+        return true;
+    }
+
+    public function canLogout(BackendUserId $userId): bool
     {
         ($userId);
 
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDeleteBackendUsers()
+    public function canDeleteBackendUsers(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAnonymous()
+    public function isAnonymous(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function canAccessBackendUsers()
+    public function canAccessBackendUsers(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function canCreateBackendUsers()
+    public function canCreateBackendUsers(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function canUpdateBackendUsers()
+    public function canUpdateBackendUsers(): bool
     {
         return false;
     }

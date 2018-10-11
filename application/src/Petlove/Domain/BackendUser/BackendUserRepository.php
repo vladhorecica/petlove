@@ -8,31 +8,19 @@ use Petlove\Domain\BackendUser\Command\UpdateBackendUser;
 use Petlove\Domain\BackendUser\Value\BackendUserId;
 use Petlove\Domain\Common\Query\Result;
 
+/**
+ * Interface BackendUserRepository
+ * @package Petlove\Domain\BackendUser
+ */
 interface BackendUserRepository
 {
-    /**
-     * @param CreateBackendUser $cmd
-     *
-     * @return BackendUserId
-     */
-    public function create(CreateBackendUser $cmd);
+    public function create(CreateBackendUser $cmd): BackendUserId;
 
-    /**
-     * @param UpdateBackendUser $cmd
-     */
     public function update(UpdateBackendUser $cmd);
 
-    /**
-     * @param BackendUserId $id
-     */
     public function delete(BackendUserId $id);
 
-    /**
-     * @param BackendUserId $id
-     *
-     * @return BackendUser
-     */
-    public function get(BackendUserId $id);
+    public function find(BackendUserId $id): BackendUser;
 
     /**
      * @param mixed     $filter

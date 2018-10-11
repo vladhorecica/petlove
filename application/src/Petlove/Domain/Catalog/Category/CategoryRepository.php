@@ -16,7 +16,7 @@ interface CategoryRepository
 
     public function delete(CategoryId $id);
 
-    public function get(CategoryId $id): Category;
+    public function find(CategoryId $id): Category;
 
     /**
      * @param mixed     $filter

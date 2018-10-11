@@ -2,12 +2,6 @@ imports:
     - { resource: validation.yml }
 
 services:
-    petlove.backend_user_service:
-        class: Petlove\Domain\BackendUser\BackendUserService
-        arguments:
-            - "@petlove.backend_user_repository"
-            - "@validator"
-
     petlove.password_encoder:
         class: Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder
         arguments:
@@ -16,6 +10,12 @@ services:
     petlove.authorization_service:
         class: Petlove\Domain\Security\Service\AuthorizationService
         public: false
+
+    petlove.backend_user_service:
+        class: Petlove\Domain\BackendUser\BackendUserService
+        arguments:
+            - "@petlove.backend_user_repository"
+            - "@validator"
 
     petlove.login_logout_service:
         class: Petlove\Domain\Security\Service\LoginLogoutService
@@ -34,3 +34,9 @@ services:
             - "@petlove.login_logout_service"
             - "@petlove.backend_session_repository"
             - "@petlove.backend_user_repository"
+
+    petlove.catalog_category_service:
+        class: Petlove\Domain\Catalog\Category\CategoryService
+        arguments:
+            - "@petlove.catalog_category_repository"
+            - "@validator"

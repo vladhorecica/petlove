@@ -109,7 +109,7 @@ class SecurityService
             throw new AuthenticationError();
         }
 
-        $user = $this->backendUserRepo->get($session->getBackendUser());
+        $user = $this->backendUserRepo->find($session->getBackendUser());
         $authorization = $this->authorizationService->createBackendUserAuthorization($user);
 
         if (!$authorization->canResumeSession()) {

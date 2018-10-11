@@ -21,3 +21,18 @@ services:
         arguments:
             - "@petlove.backend_user_light_specification"
             - "@petlove.backend_user_repository"
+
+    petlove.validator.catalog_category_unique_name:
+        class: Petlove\Domain\Catalog\Category\Validation\Validator\UniqueCategoryNameValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments:
+            - "@petlove.catalog_category_light_specification"
+            - "@petlove.catalog_category_repository"
+
+    petlove.validator.catalog_category_exists:
+        class: Petlove\Domain\Catalog\Category\Validation\Validator\CategoryExistsValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments:
+            - "@petlove.catalog_category_light_specification"

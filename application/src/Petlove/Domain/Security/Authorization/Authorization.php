@@ -5,6 +5,10 @@ namespace Petlove\Domain\Security\Authorization;
 use Petlove\Domain\BackendUser\BackendUser;
 use Petlove\Domain\BackendUser\Value\BackendUserId;
 
+/**
+ * Interface Authorization
+ * @package Petlove\Domain\Security\Authorization
+ */
 interface Authorization
 {
     /**
@@ -12,19 +16,11 @@ interface Authorization
      */
     public function getUser();
 
-    /** @return bool */
-    public function canResumeSession();
+    public function canResumeSession(): bool;
 
-    /** @return bool */
-    public function canLogin();
+    public function canLogin(): bool;
 
-    /**
-     * @param BackendUserId $userId
-     *
-     * @return bool
-     */
-    public function canLogout($userId);
+    public function canLogout(BackendUserId $userId): bool;
 
-    /** @return bool */
-    public function isAnonymous();
+    public function isAnonymous(): bool;
 }

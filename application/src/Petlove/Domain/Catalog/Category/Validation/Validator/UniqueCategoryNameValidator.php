@@ -8,8 +8,9 @@ use Petlove\Domain\Catalog\Category\CategoryRepository;
 use Petlove\Domain\Catalog\Category\Validation\UniqueCategoryName;
 use Petlove\Domain\Catalog\Category\Value\CategoryName;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueCategoryNameValidator extends Constraint
+class UniqueCategoryNameValidator extends ConstraintValidator
 {
     /** @var CategoryLightSpecification */
     private $categorySpec;

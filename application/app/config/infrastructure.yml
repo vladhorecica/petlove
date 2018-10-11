@@ -40,3 +40,18 @@ services:
   petlove.backend_session_repository:
       class: Petlove\Infrastructure\Security\RedisBackendSessionRepository
       parent: petlove.session_base_repository
+
+  ### Catalog ###
+  petlove.catalog_category_repository:
+       class: Petlove\Infrastructure\Catalog\Category\MysqlCategoryRepository
+       arguments:
+           - "@mysql_connection"
+           - "@petlove.cache.catalog_category"
+
+  petlove.catalog_category_light_specification:
+      class: Petlove\Infrastructure\Catalog\Category\MysqlCategoryLightSpecification
+      arguments:
+          - "@mysql_connection"
+
+  petlove.cache.catalog_category:
+      class: Petlove\Infrastructure\Common\Cache

@@ -34,7 +34,11 @@ class CategoryExistsValidator extends ConstraintValidator
             throw new \InvalidArgumentException('Invalid validation rule specified for category.');
         }
 
-        if (!$this->categorySpec->exists(new CategoryId($value))) {
+        if (!($value instanceof CategoryId)) {
+            return;
+        }
+
+        if (!$this->categorySpec->exists($value)) {
             $this->context->addViolation('category_does_not_exist : '.$value);
         }
     }

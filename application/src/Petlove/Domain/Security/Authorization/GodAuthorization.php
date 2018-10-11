@@ -1,24 +1,21 @@
 <?php
 
 namespace Petlove\Domain\Security\Authorization;
+use Petlove\Domain\BackendUser\Value\BackendUserId;
+use Petlove\Domain\Catalog\CatalogAuthorization;
 
 /**
- * @SuppressWarnings(PHPMD)
+ * Class GodAuthorization
+ * @package Petlove\Domain\Security\Authorization
  */
-class GodAuthorization implements BackendAuthorization
+class GodAuthorization implements BackendAuthorization, CatalogAuthorization
 {
-    /** @return bool */
-    public function canResumeSession()
+    public function canResumeSession(): bool
     {
         return true;
     }
 
-    /**
-     * @param mixed $userId
-     *
-     * @return bool
-     */
-    public function canLogout($userId)
+    public function canLogout(BackendUserId $userId = null): bool
     {
         ($userId);
 
@@ -30,39 +27,43 @@ class GodAuthorization implements BackendAuthorization
         return;
     }
 
-    /** @return bool */
-    public function canLogin()
+    public function canLogin(): bool
     {
         return false;
     }
 
-    /** @return bool */
-    public function canDeleteBackendUsers()
+    public function canDeleteBackendUsers(): bool
     {
         return true;
     }
 
-    /** @return bool */
-    public function canAccessBackendUsers()
+    public function canAccessBackendUsers(): bool
     {
         return true;
     }
 
-    /** @return bool */
-    public function canCreateBackendUsers()
+    public function canCreateBackendUsers(): bool
     {
         return true;
     }
 
-    /** @return bool */
-    public function canUpdateBackendUsers()
+    public function canUpdateBackendUsers(): bool
     {
         return true;
     }
 
-    /** @return bool */
-    public function isAnonymous()
+    public function isAnonymous(): bool
     {
         return false;
+    }
+
+    public function canManageCatalog(): bool
+    {
+        return true;
+    }
+
+    public function canAccessCatalog(): bool
+    {
+        return true;
     }
 }

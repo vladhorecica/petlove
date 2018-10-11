@@ -2,17 +2,17 @@
 
 namespace Petlove\Domain\Security\Authorization;
 
+/**
+ * Interface BackendAuthorization
+ * @package Petlove\Domain\Security\Authorization
+ */
 interface BackendAuthorization extends Authorization
 {
-    /** @return bool */
-    public function canDeleteBackendUsers();
+    public function canDeleteBackendUsers(): bool;
 
-    /** @return bool */
-    public function canAccessBackendUsers();
+    public function canAccessBackendUsers(): bool;
 
-    /** @return bool */
-    public function canCreateBackendUsers();
+    public function canCreateBackendUsers(): bool;
 
-    /** @return bool */
-    public function canUpdateBackendUsers();
+    public function canUpdateBackendUsers(): bool;
 }

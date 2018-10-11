@@ -6,7 +6,11 @@ use Petlove\Domain\Catalog\Category\Value\CategoryId;
 use Petlove\Domain\Catalog\Category\Value\CategoryName;
 use Petlove\Domain\Catalog\Category\Value\CategoryType;
 
-class Category
+/**
+ * Class Category
+ * @package Petlove\Domain\Catalog\Category
+ */
+class Category implements \JsonSerializable
 {
     /** @var CategoryId */
     private $id;
@@ -22,6 +26,7 @@ class Category
 
     /**
      * Category constructor.
+     *
      * @param CategoryId $id
      * @param CategoryName $name
      * @param CategoryType $type
@@ -58,5 +63,15 @@ class Category
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id'        => $this->id,
+            'name'      => $this->name,
+            'type'      => $this->type,
+            'parent_id' => $this->parent
+        ];
     }
 }
