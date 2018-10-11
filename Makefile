@@ -29,8 +29,8 @@ dk-migrate-db: ## Make database up to date
 dk-create-admin: ## Create admin user. arg `name` required
 	$(DK) exec -ti $(CONTAINER_NAME_PREFIX)-php-fpm /bin/bash -c "bin/console petlove:CreateAdminBackendUser $(name)@admin.com $(name) $(name)"
 
-dk-ui-start:
+dk-ui-start: ## Start UI application
 	$(DK) exec -ti $(CONTAINER_NAME_PREFIX)-node /bin/bash -c "make start"
 
-dk-install:
+dk-install: ## Install needed dependencies
 	$(DK) exec -ti $(CONTAINER_NAME_PREFIX)-node /bin/bash -c "make install"
