@@ -1,2 +1,7 @@
-dev-start:
-	docker exec -ti pet-node /bin/bash -c "npm run start"
+.PHONY: start
+start:
+	npm run start
+
+.PHONY: install
+install:
+	npm install

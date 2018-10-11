@@ -9,3 +9,7 @@ unit-tests: ## Run unit tests
 .PHONY: migrate-db
 migrate-db: ## Migrate database changes
 	bin/console petlove:MigrateDb
+
+.PHONY: install
+install: ## Install composer dependencies
+	composer install
