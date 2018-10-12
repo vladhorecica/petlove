@@ -94,6 +94,7 @@
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",
+    "popper.js": "^1.14.4",
     "postcss": "^6.0.14",
     "postcss-cssnext": "^3.0.2",
     "postcss-focus": "^3.0.0",
