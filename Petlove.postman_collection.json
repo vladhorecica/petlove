@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "75bfee86-7944-4019-9336-65253fd99797",
+		"name": "Petlove",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Backend Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US;q=0.8"
+					},
+					{
+						"key": "Authorization",
+						"value": "c6c622cf4c1f6a4e29a209c8e086bba821af7f635a4ee5e8eb5b4b0c228efd07"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/backend-users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"backend-users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Session Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@admin.com\",\n  \"password\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/sessions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Session Login",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "412ba6aa3dae9f4ac8daf5f59241611c4b4595099f9a715413829248c8897ca5"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/sessions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Session Logout",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "412ba6aa3dae9f4ac8daf5f59241611c4b4595099f9a715413829248c8897ca5"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/sessions/412ba6aa3dae9f4ac8daf5f59241611c4b4595099f9a715413829248c8897ca5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"sessions",
+						"412ba6aa3dae9f4ac8daf5f59241611c4b4595099f9a715413829248c8897ca5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"admin\",\n  \"username\": \"admin\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"somepassword\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/backend-users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"backend-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Users",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"admin\",\n  \"username\": \"updatedadmin\",\n  \"email\": \"updated@test.com\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/backend-users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"backend-users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Users",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/backend-users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"backend-users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Categories",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US;q=0.8"
+					},
+					{
+						"key": "Authorization",
+						"value": "e7f969d926b7c2ec438c9bf45d32beec41276215be592de1f99ef34910c7e1ca"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/catalog-categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"catalog-categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Categories",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "e7f969d926b7c2ec438c9bf45d32beec41276215be592de1f99ef34910c7e1ca"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"amphibians\",\n  \"name\": \"Amphibianus\",\n  \"parent_id\": null\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/catalog-categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"catalog-categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Categories",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "e133f27d1be79b6c7975a8d712b4f2fd12f4d3d747adc6900c3802dcc3ae5852"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"type\": \"amphibians\",\n  \"name\": \"Amphibianus Scalarus\",\n  \"parent_id\": null\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/catalog-categories/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"catalog-categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Categories",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "e133f27d1be79b6c7975a8d712b4f2fd12f4d3d747adc6900c3802dcc3ae5852"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/catalog-categories/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"catalog-categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
